@@ -1,0 +1,18 @@
+{
+    "name": "tmerk/polaris-pim",
+    "description": "Simple PIM in PHP.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "tfmerk\\PolarisPim\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "tfmerk",
+            "email": "t.f.merk@web.de"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

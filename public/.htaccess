@@ -1,0 +1,50 @@
+# ------------------------------------------------------------------------------
+# 1. ENVIRONMENT ENGINE CONFIGURATION
+# ------------------------------------------------------------------------------
+# Disable directory indexing so users can't browse your asset folders
+Options -Indexes
+
+# Set the default timezone for the server environment
+SetEnv TZ UTC
+
+# ------------------------------------------------------------------------------
+# 2. HIDE PHP EXISTENCE & SECURITY
+# ------------------------------------------------------------------------------
+# Block direct browser access to your bootstrap, source, and view files
+RedirectMatch 404 ^/../(src|views|vendor|composer\.json)
+
+# Prevent Apache from broadcasting its own signature
+ServerSignature Off
+
+# ------------------------------------------------------------------------------
+# 3. ROUTING ENGINE (URL REWRITING)
+# ------------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Ensure the base path matches your entry directory
+    RewriteBase /
+
+    # Redirect Trailing Slashes If Not A Real Folder...
+    # Example: /users/ -> /users (keeps routing matches clean)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Handle Front Controller Rewrite...
+    # IF the request is NOT a real file on disk (-f)...
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # AND the request is NOT a real directory on disk (-d)...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # THEN forward everything silently to public/index.php
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# 4. MIME TYPES & CACHING FOR STATIC ASSETS
+# ------------------------------------------------------------------------------
+<IfModule mod_mime.c>
+    # Ensure correct styling interpretations
+    AddType text/css .css
+    AddType application/javascript .js
+</IfModule>
