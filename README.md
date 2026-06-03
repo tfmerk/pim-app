@@ -1,14 +1,16 @@
 # PIM app
 
-This is an example project.
+Vanilla PHP PIM app.
 
-## Dependencies
+## Building and running
 
-* Vanilla PHP (8.3)
-* composer (2.7.1)
+1. Inside the root dir run `docker compose up --build`
+2. Go to `http://localhost:8080` inside your browser
 
 ## Key features
 
 * Routing
 * Request handling
 * Model View Controller setup
+
+
