@@ -1,0 +1,35 @@
+services:
+    app:
+        build: .
+        container_name: php_app
+        user: "1000:1000" # Force docker to use linux user / group ID
+        ports:
+            - "8080:80"
+        volumes:
+            # Mount the entire current directory so Apache sees both public/ and src/
+            - .:/var/www/html
+            # Protected container vendor directory from beeing overwritten by local vendor dir
+            - /var/www/html/vendor
+        depends_on:
+            database:
+                condition: service_healthy
+
+    database:
+        image: postgres:16-alpine
+        container_name: postgres_db
+        environment:
+            POSTGRES_DB: test_db
+            POSTGRES_USER: user123
+            POSTGRES_PASSWORD: password123
+        ports:
+            - "5432:5432"
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U user123 -d test_db"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
+
+volumes:
+    pgdata:
