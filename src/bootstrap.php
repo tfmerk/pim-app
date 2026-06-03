@@ -7,7 +7,7 @@ use tfmerk\PolarisPim\Framework\Route\Router;
 use tfmerk\PolarisPim\Controllers\HomeController;
 use tfmerk\PolarisPim\Controllers\ProductController;
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+require BASE_PATH . '/vendor/autoload.php';
 
 // todo only for dev env
 ini_set("display_errors", 1);

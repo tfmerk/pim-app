@@ -10,7 +10,7 @@ class View
 {
 	public static function make(string $viewName, array $data = [], string $layoutName = 'main'): string
 	{
-		$viewPath = BASE_PATH . '/views/' . $viewName . '.php';
+		$viewPath = BASE_PATH . '/src/Views/' . $viewName . '.php';
 
 		if (!file_exists($viewPath)) {
 			throw new RuntimeException('File "' . $viewPath . '" not found!');
@@ -27,7 +27,7 @@ class View
 			return $content;
 		}
 
-		$layoutPath = BASE_PATH . '/views/layouts/' . $layoutName . '.php';
+		$layoutPath = BASE_PATH . '/src/Views/layouts/' . $layoutName . '.php';
 
 		if (!file_exists($layoutPath)) {
 			throw new RuntimeException('Layout file "' . $layoutPath . '" not found!');
