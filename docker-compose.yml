@@ -2,9 +2,16 @@ services:
     app:
         build: .
         container_name: php_app
-        user: "1000:1000" # Force docker to use linux user / group ID
+        init: true
+        user: "${CURRENT_UID:-1000}:${CURRENT_GID:-1000}"
         ports:
-            - "8080:80"
+            - "${APP_PORT}:8080"
+        environment:
+          - DB_HOST=${DB_HOST}
+          - DB_PORT=${DB_PORT}
+          - DB_NAME=${DB_NAME}
+          - DB_USER=${DB_USER}
+          - DB_PASSWORD=${DB_PASSWORD}
         volumes:
             # Mount the entire current directory so Apache sees both public/ and src/
             - .:/var/www/html
@@ -18,18 +25,19 @@ services:
         image: postgres:16-alpine
         container_name: postgres_db
         environment:
-            POSTGRES_DB: test_db
-            POSTGRES_USER: user123
-            POSTGRES_PASSWORD: password123
+          POSTGRES_DB: ${DB_NAME}
+          POSTGRES_USER: ${DB_USER}
+          POSTGRES_PASSWORD: ${DB_PASSWORD}
         ports:
-            - "5432:5432"
+          - "${DB_PORT}:${DB_PORT}"
         volumes:
             - pgdata:/var/lib/postgresql/data
         healthcheck:
-            test: ["CMD-SHELL", "pg_isready -U user123 -d test_db"]
-            interval: 5s
-            timeout: 5s
-            retries: 5
+          test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+          interval: 5s
+          timeout: 5s
+          retries: 5
 
 volumes:
     pgdata:
+    php_vendor:
