@@ -26,6 +26,21 @@ try {
 	addNewColumn($pdo, 'users', 'last_seen', 'TIMESTAMP', ['NOT NULL'], 'NOW()');
 
 
+	echo 'Creating "products" table if it does not exist...', PHP_EOL;
+	$sql = 'CREATE TABLE IF NOT EXISTS "products" ('
+		. '"id" SERIAL PRIMARY KEY,'
+		. '"product_name" VARCHAR(255) NOT NULL,'
+		. '"created_at" TIMESTAMP NOT NULL'
+		. ');';
+	$pdo->exec($sql);
+
+	echo 'Checking for "products" schema updates...', PHP_EOL;
+	addNewColumn($pdo, 'products', 'price', 'INT', ['NOT NULL']);
+	addNewColumn($pdo, 'products', 'image_url', 'VARCHAR(255)', ['NULL']);
+	addNewColumn($pdo, 'products', 'marketing_text', 'TEXT', ['NULL']);
+	addNewColumn($pdo, 'products', 'metadata', 'JSONB', ['NOT NULL'], '\'{}\'');
+	addNewColumn($pdo, 'products', 'changed_at', 'TIMESTAMP', ['NOT NULL'], 'NOW()');
+
 	echo 'Migration completed successfully!', PHP_EOL;
 } catch (Throwable $t) {
 	echo 'Migration failed: ' . $t->getMessage() . PHP_EOL;

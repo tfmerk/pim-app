@@ -14,6 +14,7 @@ try {
 
 	echo 'Dropping tables ...', PHP_EOL;
 	dropTable($pdo, 'users');
+	dropTable($pdo, 'products');
 } catch (Throwable $t) {
 	echo 'Drop data base script failed: ', $t->getMessage(), PHP_EOL;
 	exit(1);
