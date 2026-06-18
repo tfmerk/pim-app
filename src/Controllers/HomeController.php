@@ -19,8 +19,6 @@ class HomeController extends AbstractController
 		$name = $this->request->query('name', 'Guest');
 		/** @var array<User> $users */
 		$users = $this->fetchUsers();
-		/** @var array<Product> $products */
-		$products = $this->fetchProducts();
 		return View::make(
 			'home/index',
 			[
@@ -28,7 +26,6 @@ class HomeController extends AbstractController
 				'heading' => 'Home of Polaris',
 				'username' => $name,
 				'users' => $users,
-				'products' => $products,
 			]
 		);
 	}
@@ -37,11 +34,5 @@ class HomeController extends AbstractController
 	{
 		$entityManager = EntityManager::createFromEnv();
 		return $entityManager->findBy(User::class);
-	}
-
-	protected function fetchProducts(): array
-	{
-		$entityManager = EntityManager::createFromEnv();
-		return $entityManager->findBy(Product::class);
 	}
 }
