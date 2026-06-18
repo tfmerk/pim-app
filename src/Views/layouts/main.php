@@ -23,6 +23,7 @@
 		<nav>
 			<a href="/" class="<?= ($uri ?? '/') === '/' ? 'active' : '' ?>">Home</a>
 			<a href="/product/list" class="<?= ($uri ?? '') === '/product/list' ? 'active' : '' ?>">Products</a>
+			<a href="/product/datasheet" target="_blank">Datasheet</a>
 		</nav>
 	</header>
 
