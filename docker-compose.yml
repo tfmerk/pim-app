@@ -7,16 +7,16 @@ services:
         ports:
             - "${APP_PORT}:8080"
         environment:
-          - DB_HOST=${DB_HOST}
-          - DB_PORT=${DB_PORT}
-          - DB_NAME=${DB_NAME}
-          - DB_USER=${DB_USER}
-          - DB_PASSWORD=${DB_PASSWORD}
+            - DB_HOST=${DB_HOST}
+            - DB_PORT=${DB_PORT}
+            - DB_NAME=${DB_NAME}
+            - DB_USER=${DB_USER}
+            - DB_PASSWORD=${DB_PASSWORD}
         volumes:
             # Mount the entire current directory so Apache sees both public/ and src/
             - .:/var/www/html
-            # Protected container vendor directory from beeing overwritten by local vendor dir
-            - /var/www/html/vendor
+            # Protected container vendor directory from being overwritten by local vendor dir
+            - php_vendor:/var/www/html/vendor
         depends_on:
             database:
                 condition: service_healthy
@@ -25,18 +25,18 @@ services:
         image: postgres:16-alpine
         container_name: postgres_db
         environment:
-          POSTGRES_DB: ${DB_NAME}
-          POSTGRES_USER: ${DB_USER}
-          POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_NAME}
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
         ports:
-          - "${DB_PORT}:${DB_PORT}"
+            - "${DB_PORT}:${DB_PORT}"
         volumes:
             - pgdata:/var/lib/postgresql/data
         healthcheck:
-          test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
-          interval: 5s
-          timeout: 5s
-          retries: 5
+            test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
 
 volumes:
     pgdata:

@@ -36,8 +36,8 @@ ServerSignature Off
     RewriteCond %{REQUEST_FILENAME} !-f
     # AND the request is NOT a real directory on disk (-d)...
     RewriteCond %{REQUEST_FILENAME} !-d
-    # THEN forward everything silently to public/index.php
-    RewriteRule ^ index.php [L]
+    # THEN forward everything silently to index.php using a leading slash
+    RewriteRule ^(.*)$ /index.php [L,QSA]
 </IfModule>
 
 # ------------------------------------------------------------------------------
