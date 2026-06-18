@@ -38,6 +38,8 @@ use tfmerk\PolarisPim\Entities\User;
 							// Format booleans to explicit true/false strings
 							if (is_bool($value)) {
 								$displayValue = $value ? 'true' : 'false';
+							} elseif (is_array($value)) {
+								$displayValue = implode(', ', $value);
 							} else {
 								$displayValue = (string) $value;
 							}
