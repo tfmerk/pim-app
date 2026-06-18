@@ -45,6 +45,23 @@ class ProductController extends AbstractController
 		);
 	}
 
+	#[Route('/product/datasheet', method: 'GET')]
+	public function datasheet(): string
+	{
+		/** @var array<Product> $product */
+		$products = $this->fetchProducts();
+		usort($products, static fn(Product $a, Product $b) => $a->price <=> $b->price);
+
+		return View::make(
+			'product/datasheet',
+			$this->request->uri,
+			[
+				'products' => $products,
+			],
+			''
+		);
+	}
+
 	protected function fetchProduct(int $id): ?Product
 	{
 		$entityManager = EntityManager::createFromEnv();

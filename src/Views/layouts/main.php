@@ -3,7 +3,6 @@
 /**
  * @var string $content
  * @var string $uri
- * @var string $uri
  */
 
 ?>
