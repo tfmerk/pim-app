@@ -8,13 +8,17 @@ use RuntimeException;
 
 class View
 {
-	public static function make(string $viewName, array $data = [], string $layoutName = 'main'): string
+	public static function make(string $viewName, string $uri, array $data = [], string $layoutName = 'main'): string
 	{
 		$viewPath = BASE_PATH . '/src/Views/' . $viewName . '.php';
 
 		if (!file_exists($viewPath)) {
 			throw new RuntimeException('File "' . $viewPath . '" not found!');
 		}
+
+
+		// insert uri so layout and inner html has it available
+		$data['uri'] = $uri;
 
 		extract($data);
 

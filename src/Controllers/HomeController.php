@@ -21,8 +21,8 @@ class HomeController extends AbstractController
 		$users = $this->fetchUsers();
 		return View::make(
 			'home/index',
+			$this->request->uri,
 			[
-				'title' => 'Polaris',
 				'heading' => 'Home of Polaris',
 				'username' => $name,
 				'users' => $users,

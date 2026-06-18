@@ -7,7 +7,7 @@ use tfmerk\PolarisPim\Entities\Product;
  */
 ?>
 <div class="card">
-	<h2>Products</h2>
+	<h1>Products</h1>
 	<table>
 		<thead>
 			<tr>

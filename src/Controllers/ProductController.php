@@ -21,6 +21,7 @@ class ProductController extends AbstractController
 
 		return View::make(
 			'product/index',
+			$this->request->uri,
 			[
 				'productID' => $productID,
 				'product' => $product,
@@ -37,8 +38,8 @@ class ProductController extends AbstractController
 
 		return View::make(
 			'product/list',
+			$this->request->uri,
 			[
-				'title' => 'Products list',
 				'products' => $products
 			]
 		);

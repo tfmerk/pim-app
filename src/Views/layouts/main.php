@@ -1,9 +1,11 @@
 <?php
 
 /**
- * @var string $title
  * @var string $content
+ * @var string $uri
+ * @var string $uri
  */
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,10 +20,15 @@
 <body>
 
 	<header>
-		<h2><?= htmlspecialchars($title ?? '') ?></h2>
+		<h2 style="width: 200px;">&star; Polaris</h2>
+		<nav>
+			<a href="/" class="<?= ($uri ?? '/') === '/' ? 'active' : '' ?>">Home</a>
+			<a href="/product/list" class="<?= ($uri ?? '') === '/product/list' ? 'active' : '' ?>">Products</a>
+		</nav>
 	</header>
 
 	<main>
+
 		<?= $content ?>
 	</main>
 

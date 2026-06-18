@@ -11,11 +11,9 @@ use tfmerk\PolarisPim\Entities\Product;
 	<?php if ($product === null): ?>
 		<h1>Product Not Found</h1>
 		<p>The requested product could not be found in our database.</p>
-		<p><a href="/product/list" style="color: #38bdf8; text-decoration: none;">&larr; Back to product list</a></p>
 	<?php else: ?>
 		<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
 			<h1><?= htmlspecialchars($product->productName) ?></h1>
-			<a href="/product/list" style="color: #38bdf8; text-decoration: none; font-size: 14px;">&larr; Back to list</a>
 		</div>
 
 		<?php if ($product->marketingText): ?>
