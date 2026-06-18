@@ -7,6 +7,8 @@ namespace tfmerk\PolarisPim\Controllers;
 use tfmerk\PolarisPim\Framework\Controller\AbstractController;
 use tfmerk\PolarisPim\Framework\Route\Route;
 use tfmerk\PolarisPim\Framework\View\View;
+use tfmerk\PolarisPim\Framework\ORM\Entity\EntityManager;
+use tfmerk\PolarisPim\Entities\Product;
 
 class ProductController extends AbstractController
 {
@@ -14,16 +16,14 @@ class ProductController extends AbstractController
 	public function index(): string
 	{
 		$productID = (int)$this->request->query('id', '0');
-		$productData = [
-			'width' => 123.45,
-			'height' => 678.99,
-			'price' => 999.99,
-		];
+		/** @var ?Product $product */
+		$product = $this->fetchProduct($productID);
+
 		return View::make(
 			'product/index',
 			[
-				'title' => 'Unknown (' . $productID . ')',
-				'productData' => $productData,
+				'productID' => $productID,
+				'product' => $product,
 			]
 		);
 	}
@@ -33,41 +33,7 @@ class ProductController extends AbstractController
 	{
 		$rawFilterProductIDs = $this->request->query('ids', '');
 		$filterProductIDs = !empty($rawFilterProductIDs) ? explode(',', $this->request->query('ids', '')) : [];
-		$level = (int)$this->request->query('level', '0');
-
-		// todo
-		// load products of provided level
-		$products = [
-			0 => [
-				['id' => 100, 'name' => 'bli'],
-				['id' => 200, 'name' => 'bla'],
-				['id' => 300, 'name' => 'blubb'],
-			],
-			1 => [
-				['id' => 1000, 'name' => 'bli'],
-				['id' => 2000, 'name' => 'bla'],
-				['id' => 3000, 'name' => 'blubb'],
-			],
-
-		];
-
-		// todo
-		// get products of provided level
-		$products = $products[$level] ?? [];
-
-		// filter by product IDs or get all if "?ids=123,456,798" was not provided
-		if (!empty($filterProductIDs)) {
-			$products = array_filter(
-				$products,
-				static fn(array $product) => in_array($product['id'], $filterProductIDs)
-			);
-		}
-
-		// inject url to the "product index" route
-		$products = array_map(
-			static fn(array $product) => array_merge($product, ['url' => '/product?id=' . $product['id']]),
-			$products
-		);
+		$products = $this->fetchProducts();
 
 		return View::make(
 			'product/list',
@@ -76,5 +42,20 @@ class ProductController extends AbstractController
 				'products' => $products
 			]
 		);
+	}
+
+	protected function fetchProduct(int $id): ?Product
+	{
+		$entityManager = EntityManager::createFromEnv();
+		return $entityManager->find(Product::class, $id);
+	}
+
+	/**
+	 * @return Product[]
+	 */
+	protected function fetchProducts(): array
+	{
+		$entityManager = EntityManager::createFromEnv();
+		return $entityManager->findBy(Product::class);
 	}
 }
