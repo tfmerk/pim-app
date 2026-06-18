@@ -38,7 +38,7 @@ try {
 		$entityManager,
 		'Batarang Deluxe',
 		14.99,
-		'https://cdn.polaris.local/batarang.png',
+		'https://picsum.photos/id/1/200',
 		'Perfect for dark nights in Gotham.',
 		['material' => 'Titanium Alloy', 'weight_g' => 250]
 	);
@@ -56,7 +56,7 @@ try {
 		$entityManager,
 		'Grapple Gun Mark IV',
 		299.99,
-		'https://cdn.polaris.local/grapple_gun.png',
+		'https://picsum.photos/id/2/200',
 		'Ascend skyscrapers effortlessly with high-tensile strength cable.',
 		['max_range_m' => 150, 'max_weight_kg' => 400]
 	);
@@ -74,7 +74,7 @@ try {
 		$entityManager,
 		'Riddler Puzzle Box',
 		19.95,
-		'https://cdn.polaris.local/puzzle_box.png',
+		'https://picsum.photos/id/3/200',
 		'Contains secrets meant only for the brilliant. Can you unlock it?',
 		['difficulty' => 'extreme', 'trapped' => true]
 	);
@@ -92,7 +92,7 @@ try {
 		$entityManager,
 		'Kryptonite Ring Replica',
 		1250.00,
-		'https://cdn.polaris.local/k_ring.png',
+		'https://picsum.photos/id/4/200',
 		'An emerald radioactive precaution just in case a certain god goes rogue.',
 		['radiation_type' => 'Gamma-Chrono', 'glow_in_dark' => true]
 	);
@@ -110,7 +110,7 @@ try {
 		$entityManager,
 		'Freeze Gun Prototype',
 		12500.00,
-		'https://cdn.polaris.local/freeze_gun.png',
+		'https://picsum.photos/id/5/200',
 		'Sustains absolute zero operational beams via diamond-core magnification.',
 		['coolant' => 'Liquid Nitrogen', 'range_m' => 45, 'requires_suit' => true]
 	);
@@ -128,7 +128,7 @@ try {
 		$entityManager,
 		'Smoke Pellet Pack (x12)',
 		24.99,
-		'https://cdn.polaris.local/smoke_pellet.png',
+		'https://picsum.photos/id/6/200',
 		'Instantaneous ninja-grade optical concealment. Nineteen-second dispersal radius.',
 		['chemical' => 'Anesthetic Blend', 'radius_m' => 5]
 	);
@@ -146,7 +146,7 @@ try {
 		$entityManager,
 		'Empirical Riddle Decoder Ring',
 		149.00,
-		'https://cdn.polaris.local/decoder_ring.png',
+		'https://picsum.photos/id/7/200',
 		'Decrypts encrypted regional radio networks used by the local police networks.',
 		['frequency_range_mhz' => 450, 'encryption_cracking' => 'SHA-256-Fallback']
 	);
@@ -164,7 +164,7 @@ try {
 		$entityManager,
 		'WayneTech Tactical Cowl Assembly',
 		3400.00,
-		'https://cdn.polaris.local/cowl.png',
+		'https://picsum.photos/id/8/200',
 		'Kevlar-weave armored helmet integrated with sonar and night-vision arrays.',
 		['audio_filters' => 'active-noise-cancelling', 'hud_os' => 'BatOS v4.12']
 	);
